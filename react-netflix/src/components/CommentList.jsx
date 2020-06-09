@@ -9,18 +9,17 @@ constructor(props){
     movieID:this.props.movieId,
   }}
 componentDidMount=() =>{
-  this.comments();
+  this.fetchComments();
 }
-comments = async () =>{
-const url = "https://striveschool.herokuapp.com/api/comments/"
-const comments = await fetch(url + this.state.movieID,{
-  headers: new Headers({
-    Authorization: "Basic dXNlcjI6NExyOW5xSFpaWkROVXk3TA==",
-  }),
-})
-.then((response) => response.json())
-this.setState({comments:comments});
-}
+fetchComments = async (movieID) => {
+  const commentsUrl = "https://striveschool.herokuapp.com/api/comments/";
+  const comments = await fetch(commentsUrl + movieID, {
+    headers: new Headers({
+      Authorization: "Basic dXNlcjI6NExyOW5xSFpaWkROVXk3TA==",
+    }),
+  }).then((response) => response.json());
+  this.setState({ comments });
+};
 componentWillMount=() =>{
   console.log("bye")
 }

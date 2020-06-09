@@ -1,5 +1,14 @@
 import React, { Component } from "react";
 import { Navbar, Nav, InputGroup, FormControl } from "react-bootstrap";
+import { Link, withRouter } from 'react-router-dom'
+import mylist from './my-list'
+import recentlyadded from './recently-added'
+import tvshows from './tv-shows'
+
+
+
+
+
 
 class NetflixNavbar extends Component {
   constructor(props) {
@@ -8,7 +17,6 @@ class NetflixNavbar extends Component {
       searchString: "",
     };
   }
-
   searchStringHandler = (e) => {
     if (e.keyCode === 13) {
       // WHEN ENTER KEY IS PRESSED
@@ -17,11 +25,12 @@ class NetflixNavbar extends Component {
       this.setState({ searchString: e.currentTarget.value });
     }
   };
-
   render() {
     return (
+      
       <Navbar variant="dark" expand="lg" style={{ backgroundColor: "#221f1f" }}>
         <Navbar.Brand href="/">
+          
           <img
             src="assets/logo.png"
             alt="logo"
@@ -31,22 +40,49 @@ class NetflixNavbar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link className="font-weight-bold" href="/">
+            <Link to="/home"
+              className={
+                this.props.location.pathname === '/home'
+                  ? "nav-link active"
+                  : "nav-link"
+              }>
               Home
-            </Nav.Link>
-            <Nav.Link active className="font-weight-bold" href="/">
-              TV Shows
-            </Nav.Link>
-            <Nav.Link className="font-weight-bold" href="/">
+            </Link>
+            
+            <Link to="/tv-shows"
+              className={
+                this.props.location.pathname === '/tv-shows'
+                  ? "nav-link active"
+                  : "nav-link"
+              }>
+              Tv 
+            </Link>
+            <Link to="/movies"
+              className={
+                this.props.location.pathname === '/movies'
+                  ? "nav-link active"
+                  : "nav-link"
+              }>
               Movies
-            </Nav.Link>
-            <Nav.Link className="font-weight-bold" href="/">
+            </Link>
+            <Link to="/recently-added"
+              className={
+                this.props.location.pathname === '/recently-added'
+                  ? "nav-link active"
+                  : "nav-link"
+              }>
               Recently Added
-            </Nav.Link>
-            <Nav.Link className="font-weight-bold" href="/">
+            </Link>
+            <Link to="/my-list"
+              className={
+                this.props.location.pathname === '/mylist'
+                  ? "nav-link active"
+                  : "nav-link"
+              }>
               My List
-            </Nav.Link>
+            </Link>
           </Nav>
+          
           <span className="d-none d-md-flex align-items-center">
             <InputGroup className="icons">
               <FormControl
@@ -67,5 +103,4 @@ class NetflixNavbar extends Component {
     );
   }
 }
-
-export default NetflixNavbar;
+export default withRouter(NetflixNavbar);

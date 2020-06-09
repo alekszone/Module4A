@@ -4,7 +4,7 @@ import { Container, Alert, Dropdown } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Gallery from "./components/Gallery";
-
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +18,8 @@ class App extends Component {
       comments: [],
     };
   }
-
+  
   url = "http://www.omdbapi.com/?i=tt3896198&apikey=b9ada604";
-
   componentDidMount = () => {
     Promise.all([
       fetch(this.url + "&s=harry%20potter")
@@ -45,7 +44,6 @@ class App extends Component {
         console.log("An error has occurred:", err);
       });
   };
-
   showSearchResult = (searchString) => {
     fetch(this.url + "&s=" + searchString)
       .then((response) => response.json())
@@ -53,23 +51,14 @@ class App extends Component {
         this.setState({ searchedMovies: responseObject.Search })
       );
   };
-
-  fetchComments = async (movieID) => {
-    const commentsUrl = "https://striveschool.herokuapp.com/api/comments/";
-    const comments = await fetch(commentsUrl + movieID, {
-      headers: new Headers({
-        Authorization: "Basic dXNlcjI6NExyOW5xSFpaWkROVXk3TA==",
-      }),
-    }).then((response) => response.json());
-    this.setState({ comments });
-  };
-
   render() {
     return (
       <div className="App">
         <div>
-          <Navbar showSearchResult={this.showSearchResult} />
-          <Container fluid className="px-4">
+          
+        <Router>
+         <Navbar />
+         <Container fluid className="px-4">
             <div className="d-flex justify-content-between">
               <div className="d-flex">
                 <h2 className="mb-4">TV Shows</h2>
@@ -135,10 +124,26 @@ class App extends Component {
             )}
             <Footer />
           </Container>
+          </Router>
         </div>
       </div>
     );
   }
 }
-
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

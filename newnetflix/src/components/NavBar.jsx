@@ -1,7 +1,9 @@
 import React from "react";
 import { Navbar, Nav, Image } from "react-bootstrap";
+import { Link, withRouter } from 'react-router-dom'
 
-const NavBar = () => (
+
+const NavBar = (props) => (
   <Navbar variant="dark" expand="lg">
     <Navbar.Brand href="#home">
       <Image
@@ -12,10 +14,11 @@ const NavBar = () => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto">
-        <Nav.Link href="#home">TV Shows</Nav.Link>
-        <Nav.Link href="#link">Movies</Nav.Link>
-        <Nav.Link href="#link">Recently Added</Nav.Link>
-        <Nav.Link href="#link">My List</Nav.Link>
+      <Link to="/home"
+       className={props.location.pathname === '/home'? "nav-link active": "nav-link"}>Home</Link>
+         <Link to="/register"
+       className={props.location.pathname === '/register'? "nav-link active": "nav-link"}>Register</Link>
+
       </Nav>
       <div className="d-flex my-3 my-lg-0">
         <i className="fa fa-search icons mr-3"></i>
@@ -26,5 +29,4 @@ const NavBar = () => (
     </Navbar.Collapse>
   </Navbar>
 );
-
-export default NavBar;
+export default withRouter(NavBar);

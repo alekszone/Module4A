@@ -54,12 +54,12 @@ this.setState({
     <Card key={movies.asin} className="mt-1 " style={{width:"150px" , height:"300px"}}>
   <Card.Img variant="top"  src={movies.img} style={{height:"100px"}} />
   <Card.Body style={{height:"100px"}}>
-<Card.Title>{movies.title.slice(0,20)}</Card.Title>
+<Card.Title><h6>{movies.title.slice(0,8)}</h6></Card.Title>
 <Card.Title>{movies.price}</Card.Title>
     <Card.Text>
       {movies.category}
     </Card.Text>
-    <Button variant="success"><Link navlink to={"/Comment/"+ movies.asin }> Coments</Link></Button>
+    <Button variant="success"><Link  className="nav-link" style={{color:'white'}} to={"/Comment/"+ movies.asin }> Coments</Link></Button>
     
   </Card.Body>
 </Card>
@@ -67,7 +67,7 @@ this.setState({
     )   
 })}
 </Row>
-<Button variant="success"><Link navlink to={"/CommentList/"}>All Coments</Link></Button>
+
 </Container>
 <Button className="mt-5" variant="success" onClick={this.showMore}>Show More</Button>
 

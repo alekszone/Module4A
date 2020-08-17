@@ -11,26 +11,6 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import Comment from './components/Comment'
 class App extends Component {
 
-  state={
-    comments:[]
-  }
-componentDidMount = async()=>{
- 
-let response = await fetch("https://striveschool-api.herokuapp.com/api/comments",{
-  headers: {
-    'Authorization': 'Basic ' + btoa("user16:c9WEUxMS294hN6fF"),
-    'Content-Type': 'application/json'  
-}
-})
-
-  let coments= await response.json()
-  this.setState({
-    comments:coments
-  })
-console.log("hello",coments)
-
-}
-
 
 
 
@@ -44,7 +24,7 @@ render(){
          <MyNav /> 
          <Jumbotron />
          <Switch> 
-         <Route path="/Comment" >
+         <Route path="/Comment/:id" >
   <Comment />
   </Route> 
   <Route path="/CommentList" >

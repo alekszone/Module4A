@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import {Button,Card,Row,Col,Container,ToggleButton } from  'react-bootstrap'
-import {Link } from 'react-router-dom'
-
+import {Button,Card,Row,Col,Container,FormControl,Form } from  'react-bootstrap'
+import SingleBook from './singleBook'
 
 const category ={
     fantasy: require ("../fantasy.json"),
@@ -14,8 +13,12 @@ const category ={
 
  class LatestRelease extends Component {
 state={
+  
     limit:8,
-    books:category.fantasy
+    books:category.fantasy,
+    category: "fantasy",
+    filterBooks: ""
+
 }
 movies = ["fantasy","history","horror","romance","scifi"]
 
@@ -24,9 +27,25 @@ movies = ["fantasy","history","horror","romance","scifi"]
 movi=(event)=>{
     const singleMovie = event.currentTarget.value
 this.setState({
-    books:category[singleMovie]
+    books:category[singleMovie],
+    category:singleMovie
 })
 console.log(this.state.books) 
+}
+
+
+filter=(event)=>{
+    if(event){
+const single= this.state.books.filter((book) => book.title.toLowerCase().includes(event))
+   
+    this.setState({
+        books:single,
+        filterBooks:single
+    }) }else{
+        this.setState({
+            books:category.fantasy 
+        })
+    }
 }
 
 
@@ -42,28 +61,22 @@ this.setState({
     
         return (
          <>
+          <Form inline  style={{marginLeft:"600px",marginBottom:"50px"}}>
+              <FormControl  type="text" placeholder="Search" onChange={book=>this.filter(book.currentTarget.value)} className="mr-sm-2" />
+              <Button variant="outline-info">Search</Button>
+            </Form>
+             
+
+
          {this.movies.map((categorys,key)=>{
              return(
- <Button variant="primary" value={categorys} key={key} onClick={this.movi} >{categorys}</Button>
+ <Button variant="primary" value={categorys} key={key} onClick={this.movi}>{categorys}</Button>
          )})}
 <Container>
 <Row>
 {this.state.books.slice(0,this.state.limit).map((movies,key)=>{   
      return(
-    <Col xs lg={3}>
-    <Card key={movies.asin} className="mt-1 " style={{width:"150px" , height:"300px"}}>
-  <Card.Img variant="top"  src={movies.img} style={{height:"100px"}} />
-  <Card.Body style={{height:"100px"}}>
-<Card.Title><h6>{movies.title.slice(0,8)}</h6></Card.Title>
-<Card.Title>{movies.price}</Card.Title>
-    <Card.Text>
-      {movies.category}
-    </Card.Text>
-    <Button variant="success"><Link  className="nav-link" style={{color:'white'}} to={"/Comment/"+ movies.asin }> Coments</Link></Button>
-    
-  </Card.Body>
-</Card>
-</Col>
+   <SingleBook movies={movies} key={key} category={this.state.category} />
     )   
 })}
 </Row>

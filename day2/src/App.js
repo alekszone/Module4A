@@ -24,7 +24,7 @@ render(){
          <MyNav /> 
          <Jumbotron />
          <Switch> 
-         <Route path="/Comment/:id" >
+         <Route path="/Comment/:id/:category" >
   <Comment />
   </Route> 
   <Route path="/CommentList" >

@@ -7,13 +7,13 @@ export default class Footer extends Component {
         return (
             <footer>
             <Row className="mb-0"  style={{bottom:"0%", height:"50px"  }} >
-     <Col xs={3} lg={3} style={{border:"solid 2px red"}}>
+     <Col xs={3} lg={3} >
   You can find us 
          </Col>   
-         <Col xs={6} lg={6} style={{border:"solid 2px red"}}>
+         <Col xs={6} lg={6} >
        <img src={insta} style={{height:"30px"}}/>
          </Col>
-         <Col xs = {3} lg={3} style={{border:"solid 2px red"}}>
+         <Col xs = {3} lg={3} >
            My Homepage
          </Col>
             
